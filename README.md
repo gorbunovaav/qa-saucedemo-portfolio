@@ -1,62 +1,47 @@
-# SauceDemo QA Portfolio Project
+![Playwright](https://img.shields.io/badge/Playwright-2EAD33?logo=playwright&logoColor=white)
 
-Портфолио-проект по ручному и автоматизированному тестированию интернет-магазина SauceDemo.
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
 
-## 🎯 Цель проекта
+![Manual QA](https://img.shields.io/badge/Manual%20Testing-QA-blue)
 
-Продемонстрировать практические навыки QA-инженера на примере тестирования веб-приложения:
+# SauceDemo QA Portfolio
 
-- анализ функциональности приложения;
-- составление чек-листов и тест-кейсов;
-- проведение smoke, функционального и исследовательского тестирования;
-- оформление bug reports;
-- тестирование REST API;
-- написание SQL-запросов;
-- автоматизация пользовательских сценариев с помощью Playwright.
+Проект демонстрирует навыки ручного и автоматизированного тестирования интернет-магазина SauceDemo.
 
-## 🌐 Объект тестирования
+## Что реализовано
 
-https://www.saucedemo.com/
+### Manual Testing
 
-## 🛠 Используемые инструменты
+- Smoke Checklist
+- Login Checklist
+- Cart Checklist
+- Checkout Checklist
 
-- Manual Testing
-- Chrome DevTools
-- Postman
-- SQL
+- Test Cases
+- Bug Reports
+
+### Automation
+
 - Playwright
-- JavaScript
-- Git & GitHub
+- TypeScript
+- Page Object Model
+- Chrome
+- Firefox
+- Safari
 
-## 📂 Структура проекта
+## Структура проекта
 
-```
-checklists/     — чек-листы
-bug-reports/    — найденные дефекты
-test-cases/     — тест-кейсы
-api/            — коллекции Postman
-sql/            — SQL-запросы
-playwright/     — UI-автотесты
-```
+manual-testing/
+playwright/
 
-## ✅ Выполнено
+## Запуск
 
-- [x] Анализ функциональности
-- [x] Smoke Checklist
-- [x] Login Checklist
-- [x] Cart Checklist
-- [ ] Checkout Checklist
-- [x] Bug Reports
-- [ ] Test Cases
-- [ ] API Testing (Postman)
-- [ ] SQL Queries
-- [ ] UI Automation (Playwright)
+cd playwright
 
-## 📌 Основные проверенные сценарии
+npm install
 
-- Авторизация пользователя
-- Работа с каталогом товаров
-- Добавление и удаление товаров из корзины
-- Оформление заказа
-- Проверка пользовательских сценариев
-- Поиск дефектов интерфейса и логики
+npx playwright test
+
+## Отчет
+
+npx playwright show-report
