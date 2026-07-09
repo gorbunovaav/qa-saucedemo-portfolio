@@ -143,6 +143,23 @@ CI-пайплайн выполняет следующие шаги:
 
 ---
 
+## Test Reports
+
+В проекте настроены два вида отчетов:
+
+- **Playwright HTML Report** — стандартный отчет Playwright для анализа результатов тестов;
+- **Allure Report** — расширенный отчет с более удобной структурой test suites, статусов и деталей выполнения.
+
+После запуска тестов в GitHub Actions отчеты сохраняются как artifacts:
+
+- `playwright-report`;
+- `allure-report`;
+- `allure-results`.
+
+Это позволяет анализировать результаты автотестов после каждого CI-запуска.
+
+---
+
 ## Поддерживаемые браузеры
 
 Автотесты могут запускаться в нескольких браузерах:
@@ -460,6 +477,23 @@ The CI pipeline performs the following steps:
 * installs Playwright browsers;
 * runs automated UI tests;
 * uploads the Playwright HTML Report as an artifact.
+
+---
+
+## Test Reports
+
+The project uses two types of test reports:
+
+- **Playwright HTML Report** — the default Playwright report for test result analysis;
+- **Allure Report** — an extended report with structured test suites, statuses, and execution details.
+
+After each GitHub Actions run, the reports are saved as artifacts:
+
+- `playwright-report`;
+- `allure-report`;
+- `allure-results`.
+
+This allows test results to be analyzed after every CI execution.
 
 ---
 
