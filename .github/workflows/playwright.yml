@@ -26,6 +26,12 @@ jobs:
           node-version: 24
           cache: npm
           cache-dependency-path: playwright/package-lock.json
+      
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
 
       - name: Install dependencies
         run: npm ci
@@ -42,4 +48,20 @@ jobs:
         with:
           name: playwright-report
           path: playwright/playwright-report/
+          retention-days: 30
+      
+      - name: Upload Allure report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: playwright/allure-report/
+          retention-days: 30
+
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: playwright/allure-results/
           retention-days: 30
