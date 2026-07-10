@@ -1,0 +1,7 @@
+# Playwright reports and debug artifacts
+playwright/playwright-report/
+playwright/test-results/
+
+# Allure reports
+playwright/allure-results/
+playwright/allure-report/

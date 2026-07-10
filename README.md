@@ -187,6 +187,28 @@ CI-пайплайн выполняет следующие шаги:
 
 ---
 
+### Примеры отчетов
+
+#### GitHub Actions
+
+Успешный запуск CI pipeline:
+
+![GitHub Actions Success](docs/screenshots/github-actions-success.jpg)
+
+#### Allure Report
+
+Пример Allure Report после выполнения автотестов:
+
+![Allure Report Overview](docs/screenshots/allure-report-overview.jpg)
+
+#### Playwright HTML Report
+
+Пример стандартного HTML-отчета Playwright:
+
+![Playwright HTML Report](docs/screenshots/playwright-report.jpg)
+
+---
+
 ## Debugging Artifacts
 
 Для анализа падений автотестов в проекте настроены debug artifacts:
@@ -362,14 +384,6 @@ npm run allure:serve
 ```bash
 npm run trace:open -- path/to/trace.zip
 ```
-
----
-
-## Playwright Report
-
-Пример HTML-отчета Playwright:
-
-![Playwright Report](playwright/screenshots/playwright-report.png)
 
 ---
 
@@ -617,6 +631,28 @@ This allows test results to be analyzed after every CI execution.
 
 ---
 
+### Report Examples
+
+#### GitHub Actions
+
+Successful CI pipeline run:
+
+![GitHub Actions Success](docs/screenshots/github-actions-success.png)
+
+#### Allure Report
+
+Example of the Allure Report after automated test execution:
+
+![Allure Report Overview](docs/screenshots/allure-report-overview.png)
+
+#### Playwright HTML Report
+
+Example of the default Playwright HTML report:
+
+![Playwright HTML Report](docs/screenshots/playwright-report.png)
+
+---
+
 ## Debugging Artifacts
 
 The project is configured to collect debugging artifacts for failed tests:
@@ -792,14 +828,6 @@ Open Playwright trace:
 ```bash
 npm run trace:open -- path/to/trace.zip
 ```
-
----
-
-## Playwright Report
-
-Example of a Playwright HTML report:
-
-![Playwright Report](playwright/screenshots/playwright-report.png)
 
 ---
 
