@@ -31,6 +31,10 @@ export default defineConfig({
   },
 
   projects: [
+      {
+      name: 'api',
+      testMatch: '**/api/**/*.spec.ts',
+    },
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
