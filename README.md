@@ -1,7 +1,7 @@
 ![Playwright](https://img.shields.io/badge/Playwright-2EAD33?logo=playwright\&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript\&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js\&logoColor=white)
-![GitHub Actions](https://github.com/happydepresso/qa-saucedemo-portfolio/actions/workflows/playwright.yml/badge.svg)
+![GitHub Actions](https://github.com/gorbunovaav/qa-saucedemo-portfolio/actions/workflows/playwright.yml/badge.svg)
 ![QA](https://img.shields.io/badge/QA-Portfolio-blue)
 
 # SauceDemo QA Portfolio
@@ -17,7 +17,7 @@
 
 **SauceDemo QA Portfolio** — портфолио-проект по ручному и автоматизированному тестированию интернет-магазина SauceDemo.
 
-Проект демонстрирует практические навыки **Manual QA** и **QA Automation**: тест-дизайн, написание тестовой документации, оформление bug reports, автоматизация UI-тестов, использование Page Object Model, кроссбраузерный запуск и настройка CI/CD через GitHub Actions.
+Проект демонстрирует практические навыки **Manual QA** и **QA Automation**: тест-дизайн, написание тестовой документации, оформление bug reports, автоматизация UI-тестов, использование Page Object Model, API/HTTP-проверки, кроссбраузерный запуск, настройка CI/CD через GitHub Actions, Allure Report и debug artifacts для анализа падений.
 
 ## Объект тестирования
 
@@ -36,7 +36,10 @@ https://www.saucedemo.com/
 * regression testing;
 * оформление bug reports;
 * автоматизация UI-тестов;
+* API/HTTP checks;
 * настройка CI/CD;
+* настройка тестовой отчетности;
+* анализ падений через Trace Viewer;
 * запуск тестов в разных браузерах.
 
 ---
@@ -89,11 +92,15 @@ https://www.saucedemo.com/
 
 * [Bug Reports](manual-testing/bug-reports/)
 
-### Automation Testing
+---
 
-Автоматизированные UI-тесты реализованы на **Playwright + TypeScript** с использованием паттерна **Page Object Model**.
+## Automation Testing
 
-Автотесты покрывают основные пользовательские сценарии интернет-магазина:
+Автоматизированные тесты реализованы на **Playwright + TypeScript** с использованием паттерна **Page Object Model**.
+
+### UI-тесты
+
+UI-тесты покрывают основные пользовательские сценарии интернет-магазина:
 
 * успешная авторизация;
 * негативные проверки формы логина;
@@ -109,17 +116,32 @@ https://www.saucedemo.com/
 * проверка checkout overview;
 * завершение покупки.
 
+### API / HTTP checks
+
+В проект добавлены базовые API/HTTP-проверки с использованием Playwright `request` fixture.
+
+Проверки покрывают:
+
+* доступность главной страницы;
+* HTTP status code;
+* content-type ответа;
+* наличие ожидаемого контента в HTML;
+* обработку несуществующего маршрута.
+
+Так как SauceDemo не предоставляет полноценный публичный backend API для заказов, данный блок оформлен как **API / HTTP checks**, а не как полноценное API-тестирование бизнес-логики.
+
 ---
 
 ## Покрытие автотестами
 
-| Раздел    | Количество тестов |
-| --------- | ----------------: |
-| Login     |                 8 |
-| Inventory |                 9 |
-| Cart      |                 6 |
-| Checkout  |                 7 |
-| **Всего** |            **30** |
+| Раздел            | Количество тестов |
+| ----------------- | ----------------: |
+| Login UI          |                 8 |
+| Inventory UI      |                 9 |
+| Cart UI           |                 6 |
+| Checkout UI       |                 7 |
+| API / HTTP checks |                 4 |
+| **Всего**         |            **34** |
 
 ---
 
@@ -136,10 +158,15 @@ CI-пайплайн выполняет следующие шаги:
 
 * скачивает репозиторий;
 * устанавливает Node.js;
+* устанавливает Java для генерации Allure Report;
 * устанавливает зависимости проекта;
 * устанавливает браузеры Playwright;
-* запускает автоматизированные UI-тесты;
-* сохраняет Playwright HTML Report как artifact.
+* запускает автоматизированные тесты;
+* генерирует Allure Report;
+* сохраняет Playwright HTML Report как artifact;
+* сохраняет Allure Report как artifact;
+* сохраняет Allure Results как artifact;
+* сохраняет Playwright debug artifacts при падениях тестов.
 
 ---
 
@@ -147,28 +174,46 @@ CI-пайплайн выполняет следующие шаги:
 
 В проекте настроены два вида отчетов:
 
-- **Playwright HTML Report** — стандартный отчет Playwright для анализа результатов тестов;
-- **Allure Report** — расширенный отчет с более удобной структурой test suites, статусов и деталей выполнения.
+* **Playwright HTML Report** — стандартный отчет Playwright для анализа результатов тестов;
+* **Allure Report** — расширенный отчет с удобной структурой test suites, статусов и деталей выполнения.
 
 После запуска тестов в GitHub Actions отчеты сохраняются как artifacts:
 
-- `playwright-report`;
-- `allure-report`;
-- `allure-results`.
+* `playwright-report`;
+* `allure-report`;
+* `allure-results`.
 
 Это позволяет анализировать результаты автотестов после каждого CI-запуска.
 
 ---
 
+## Debugging Artifacts
+
+Для анализа падений автотестов в проекте настроены debug artifacts:
+
+* trace on failure;
+* screenshot on failure;
+* video on failure.
+
+Trace Viewer позволяет пошагово анализировать выполнение теста: действия пользователя, DOM-состояние страницы, screenshots и network-запросы.
+
+Debug artifacts сохраняются только для упавших тестов. Это позволяет не засорять успешные прогоны, но сохранять достаточно данных для анализа падений.
+
+В GitHub Actions debug artifacts сохраняются как `playwright-test-results`.
+
+---
+
 ## Поддерживаемые браузеры
 
-Автотесты могут запускаться в нескольких браузерах:
+UI-тесты могут запускаться в нескольких браузерах:
 
 * Chromium;
 * Firefox;
 * WebKit.
 
 Для быстрой локальной разработки используется запуск в Chromium. Полный кроссбраузерный прогон можно использовать перед push или в CI.
+
+API/HTTP checks вынесены в отдельный Playwright project `api`, чтобы они не дублировались в браузерных проектах.
 
 ---
 
@@ -197,15 +242,24 @@ qa-saucedemo-portfolio/
 │   ├── fixtures/
 │   ├── pages/
 │   ├── tests/
+│   │   ├── api/
+│   │   │   └── saucedemo-api.spec.ts
+│   │   ├── login.spec.ts
+│   │   ├── inventory.spec.ts
+│   │   ├── cart.spec.ts
+│   │   └── checkout.spec.ts
+│   │
 │   ├── screenshots/
 │   ├── playwright.config.ts
 │   ├── package.json
+│   ├── package-lock.json
 │   └── tsconfig.json
 │
 ├── .github/
 │   └── workflows/
 │       └── playwright.yml
 │
+├── .gitignore
 └── README.md
 ```
 
@@ -231,7 +285,7 @@ npm install
 npm run test
 ```
 
-Запустить все тесты только в Chromium:
+Запустить все UI-тесты только в Chromium:
 
 ```bash
 npm run test:chromium
@@ -261,6 +315,12 @@ npm run test:cart
 npm run test:checkout
 ```
 
+Запустить только API/HTTP checks:
+
+```bash
+npm run test:api
+```
+
 Запустить тесты в headed-режиме:
 
 ```bash
@@ -273,10 +333,34 @@ npm run test:headed
 npm run test:ui
 ```
 
-Открыть HTML-отчет:
+Открыть Playwright HTML Report:
 
 ```bash
 npm run report
+```
+
+Сгенерировать Allure Report:
+
+```bash
+npm run allure:generate
+```
+
+Открыть Allure Report:
+
+```bash
+npm run allure:open
+```
+
+Сгенерировать и сразу открыть Allure Report:
+
+```bash
+npm run allure:serve
+```
+
+Открыть Playwright trace:
+
+```bash
+npm run trace:open -- path/to/trace.zip
 ```
 
 ---
@@ -297,8 +381,11 @@ npm run report
 * Git;
 * GitHub;
 * GitHub Actions;
+* Allure Report;
+* Playwright HTML Report;
+* Trace Viewer;
 * Page Object Model;
-* HTML Report.
+* APIRequestContext / request fixture.
 
 ---
 
@@ -320,6 +407,7 @@ npm run report
 ### Automation QA
 
 * UI automation;
+* API/HTTP checks;
 * Playwright;
 * TypeScript;
 * Page Object Model;
@@ -330,7 +418,12 @@ npm run report
 * кроссбраузерное тестирование;
 * настройка npm scripts;
 * настройка GitHub Actions;
-* анализ HTML-отчета.
+* настройка Allure Report;
+* настройка Playwright HTML Report;
+* работа с CI artifacts;
+* анализ HTML-отчета;
+* анализ падений через Trace Viewer;
+* работа с trace, screenshots и video on failure.
 
 ---
 
@@ -338,13 +431,13 @@ npm run report
 
 Планируемые улучшения:
 
-* подключить Allure Report;
-* добавить API-тесты на Playwright;
-* добавить Docker;
-* добавить примеры Trace Viewer;
+* добавить Docker для запуска тестов в контейнере;
+* опубликовать Allure Report через GitHub Pages;
+* расширить API/HTTP checks при наличии подходящих backend endpoints;
 * расширить набор bug reports при дальнейшем exploratory testing;
 * добавить больше негативных и edge-case сценариев;
-* улучшить README с примерами отчетов и скриншотов.
+* добавить визуальные проверки для отдельных UI-состояний;
+* улучшить README с дополнительными скриншотами Allure Report и Trace Viewer.
 
 ---
 
@@ -354,7 +447,7 @@ npm run report
 
 **SauceDemo QA Portfolio** is a QA portfolio project focused on manual and automated testing of the SauceDemo e-commerce web application.
 
-The project demonstrates practical **Manual QA** and **QA Automation** skills: test design, test documentation, bug reporting, UI test automation, Page Object Model, cross-browser testing, and CI/CD setup with GitHub Actions.
+The project demonstrates practical **Manual QA** and **QA Automation** skills: test design, test documentation, bug reporting, UI test automation, Page Object Model, API/HTTP checks, cross-browser testing, CI/CD setup with GitHub Actions, Allure Report, and debugging artifacts for failure analysis.
 
 ## Application Under Test
 
@@ -373,7 +466,10 @@ The goal of this project is to demonstrate a complete QA approach to testing a w
 * regression testing;
 * bug reporting;
 * UI test automation;
+* API/HTTP checks;
 * CI/CD setup;
+* test reporting setup;
+* failure analysis with Trace Viewer;
 * cross-browser test execution.
 
 ---
@@ -426,11 +522,15 @@ The documentation is organized by the main functional areas of the application:
 
 * [Bug Reports](manual-testing/bug-reports/)
 
-### Automation Testing
+---
 
-Automated UI tests are implemented with **Playwright + TypeScript** using the **Page Object Model** pattern.
+## Automation Testing
 
-The automated tests cover the main user scenarios of the e-commerce application:
+Automated tests are implemented with **Playwright + TypeScript** using the **Page Object Model** pattern.
+
+### UI Tests
+
+The UI tests cover the main user scenarios of the e-commerce application:
 
 * successful login;
 * negative login validation;
@@ -446,23 +546,38 @@ The automated tests cover the main user scenarios of the e-commerce application:
 * checkout overview validation;
 * order completion.
 
+### API / HTTP Checks
+
+The project includes basic API/HTTP checks using the Playwright `request` fixture.
+
+The checks cover:
+
+* main page availability;
+* HTTP status code;
+* response content-type;
+* expected content in HTML;
+* handling of a non-existing route.
+
+Since SauceDemo does not provide a full public backend API for order management, this section is intentionally described as **API / HTTP checks**, not full business API testing.
+
 ---
 
 ## Automated Test Coverage
 
-| Area      | Number of Tests |
-| --------- | --------------: |
-| Login     |               8 |
-| Inventory |               9 |
-| Cart      |               6 |
-| Checkout  |               7 |
-| **Total** |          **30** |
+| Area              | Number of Tests |
+| ----------------- | --------------: |
+| Login UI          |               8 |
+| Inventory UI      |               9 |
+| Cart UI           |               6 |
+| Checkout UI       |               7 |
+| API / HTTP checks |               4 |
+| **Total**         |          **34** |
 
 ---
 
 ## CI/CD
 
-The project uses **GitHub Actions** to run automated UI tests.
+The project uses **GitHub Actions** to run automated tests.
 
 The tests are triggered automatically on:
 
@@ -473,10 +588,15 @@ The CI pipeline performs the following steps:
 
 * checks out the repository;
 * sets up Node.js;
+* sets up Java for Allure Report generation;
 * installs project dependencies;
 * installs Playwright browsers;
-* runs automated UI tests;
-* uploads the Playwright HTML Report as an artifact.
+* runs automated tests;
+* generates Allure Report;
+* uploads Playwright HTML Report as an artifact;
+* uploads Allure Report as an artifact;
+* uploads Allure Results as an artifact;
+* uploads Playwright debugging artifacts for failed tests.
 
 ---
 
@@ -484,28 +604,46 @@ The CI pipeline performs the following steps:
 
 The project uses two types of test reports:
 
-- **Playwright HTML Report** — the default Playwright report for test result analysis;
-- **Allure Report** — an extended report with structured test suites, statuses, and execution details.
+* **Playwright HTML Report** — the default Playwright report for test result analysis;
+* **Allure Report** — an extended report with structured test suites, statuses, and execution details.
 
 After each GitHub Actions run, the reports are saved as artifacts:
 
-- `playwright-report`;
-- `allure-report`;
-- `allure-results`.
+* `playwright-report`;
+* `allure-report`;
+* `allure-results`.
 
 This allows test results to be analyzed after every CI execution.
 
 ---
 
+## Debugging Artifacts
+
+The project is configured to collect debugging artifacts for failed tests:
+
+* trace on failure;
+* screenshot on failure;
+* video on failure.
+
+Trace Viewer helps analyze test execution step by step, including user actions, page DOM snapshots, screenshots, and network requests.
+
+Debugging artifacts are collected only for failed tests. This keeps successful test runs clean while preserving enough information for failure analysis.
+
+In GitHub Actions, debugging artifacts are saved as `playwright-test-results`.
+
+---
+
 ## Supported Browsers
 
-The automated tests can be executed in multiple browsers:
+The UI tests can be executed in multiple browsers:
 
 * Chromium;
 * Firefox;
 * WebKit.
 
 Chromium is used for fast local development. Full cross-browser execution can be used before push or in CI.
+
+API/HTTP checks are placed in a separate Playwright project named `api`, so they are not duplicated across browser projects.
 
 ---
 
@@ -534,15 +672,24 @@ qa-saucedemo-portfolio/
 │   ├── fixtures/
 │   ├── pages/
 │   ├── tests/
+│   │   ├── api/
+│   │   │   └── saucedemo-api.spec.ts
+│   │   ├── login.spec.ts
+│   │   ├── inventory.spec.ts
+│   │   ├── cart.spec.ts
+│   │   └── checkout.spec.ts
+│   │
 │   ├── screenshots/
 │   ├── playwright.config.ts
 │   ├── package.json
+│   ├── package-lock.json
 │   └── tsconfig.json
 │
 ├── .github/
 │   └── workflows/
 │       └── playwright.yml
 │
+├── .gitignore
 └── README.md
 ```
 
@@ -568,7 +715,7 @@ Run all tests:
 npm run test
 ```
 
-Run all tests in Chromium only:
+Run all UI tests in Chromium only:
 
 ```bash
 npm run test:chromium
@@ -598,6 +745,12 @@ Run Checkout tests only:
 npm run test:checkout
 ```
 
+Run API/HTTP checks only:
+
+```bash
+npm run test:api
+```
+
 Run tests in headed mode:
 
 ```bash
@@ -610,10 +763,34 @@ Open Playwright UI mode:
 npm run test:ui
 ```
 
-Open HTML report:
+Open Playwright HTML Report:
 
 ```bash
 npm run report
+```
+
+Generate Allure Report:
+
+```bash
+npm run allure:generate
+```
+
+Open Allure Report:
+
+```bash
+npm run allure:open
+```
+
+Generate and open Allure Report:
+
+```bash
+npm run allure:serve
+```
+
+Open Playwright trace:
+
+```bash
+npm run trace:open -- path/to/trace.zip
 ```
 
 ---
@@ -634,8 +811,11 @@ Example of a Playwright HTML report:
 * Git;
 * GitHub;
 * GitHub Actions;
+* Allure Report;
+* Playwright HTML Report;
+* Trace Viewer;
 * Page Object Model;
-* HTML Report.
+* APIRequestContext / request fixture.
 
 ---
 
@@ -657,6 +837,7 @@ Example of a Playwright HTML report:
 ### Automation QA
 
 * UI automation;
+* API/HTTP checks;
 * Playwright;
 * TypeScript;
 * Page Object Model;
@@ -667,7 +848,12 @@ Example of a Playwright HTML report:
 * cross-browser testing;
 * npm scripts setup;
 * GitHub Actions setup;
-* HTML report analysis.
+* Allure Report setup;
+* Playwright HTML Report setup;
+* working with CI artifacts;
+* HTML report analysis;
+* failure analysis with Trace Viewer;
+* working with trace, screenshots, and video on failure.
 
 ---
 
@@ -675,10 +861,10 @@ Example of a Playwright HTML report:
 
 Planned improvements:
 
-* add Allure Report;
-* add API tests with Playwright;
-* add Docker;
-* add Trace Viewer examples;
+* add Docker for running tests in a container;
+* publish Allure Report via GitHub Pages;
+* expand API/HTTP checks if suitable backend endpoints are available;
 * expand bug reports during further exploratory testing;
 * add more negative and edge-case scenarios;
-* improve README with report examples and screenshots.
+* add visual checks for selected UI states;
+* improve README with additional Allure Report and Trace Viewer screenshots.
