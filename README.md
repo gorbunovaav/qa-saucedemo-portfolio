@@ -74,23 +74,22 @@ https://www.saucedemo.com/
 
 #### Checklists
 
-* [Smoke Checklist](manual-testing/checklists/smoke-checklist.md)
-* [Login Checklist](manual-testing/checklists/login-checklist.md)
-* [Inventory Checklist](manual-testing/checklists/inventory-checklist.md)
-* [Cart Checklist](manual-testing/checklists/cart-checklist.md)
-* [Checkout Checklist](manual-testing/checklists/checkout-checklist.md)
-* [Regression Checklist](manual-testing/checklists/regression-checklist.md)
+* [Smoke Checklist](manual-testing/docs/checklists/smoke-checklist.md)
+* [Login Checklist](manual-testing/docs/checklists/login-checklist.md)
+* [Inventory Checklist](manual-testing//docs/checklists/inventory-checklist.md)
+* [Cart Checklist](manual-testing//docs/checklists/cart-checklist.md)
+* [Checkout Checklist](manual-testing//docs/checklists/checkout-checklist.md)
 
 #### Test Cases
 
-* [Login Test Cases](manual-testing/test-cases/login-test-cases.md)
-* [Inventory Test Cases](manual-testing/test-cases/inventory-test-cases.md)
-* [Cart Test Cases](manual-testing/test-cases/cart-test-cases.md)
-* [Checkout Test Cases](manual-testing/test-cases/checkout-test-cases.md)
+* [Login Test Cases](manual-testing/docs/test-cases/login-test-cases.md)
+* [Inventory Test Cases](manual-testing/docs/test-cases/inventory-test-cases.md)
+* [Cart Test Cases](manual-testing/docs/test-cases/cart-test-cases.md)
+* [Checkout Test Cases](manual-testing/docs/test-cases/checkout-test-cases.md)
 
 #### Bug Reports
 
-* [Bug Reports](manual-testing/bug-reports/)
+* [Bug Reports](manual-testing/docs/bug-reports/)
 
 ---
 
@@ -187,6 +186,14 @@ CI-пайплайн выполняет следующие шаги:
 
 ---
 
+### Live Allure Report
+
+Актуальный Allure Report опубликован через GitHub Pages:
+
+[Open Allure Report](https://gorbunovaav.github.io/qa-saucedemo-portfolio/)
+
+---
+
 ### Примеры отчетов
 
 #### GitHub Actions
@@ -245,20 +252,36 @@ API/HTTP checks вынесены в отдельный Playwright project `api`,
 qa-saucedemo-portfolio/
 
 ├── manual-testing/
-│   ├── bug-reports/
-│   ├── checklists/
-│   │   ├── smoke-checklist.md
-│   │   ├── login-checklist.md
-│   │   ├── inventory-checklist.md
-│   │   ├── cart-checklist.md
-│   │   ├── checkout-checklist.md
-│   │   └── regression-checklist.md
-│   │
-│   └── test-cases/
-│       ├── login-test-cases.md
-│       ├── inventory-test-cases.md
-│       ├── cart-test-cases.md
-│       └── checkout-test-cases.md
+│   └── docs/
+│       ├── bug-reports/
+│       │   ├── BUG-001.md
+│       │   ├── BUG-002.md
+│       │   ├── BUG-003.md
+│       │   └── BUG-004.md
+│       │
+│       ├── checklists/
+│       │   ├── smoke-checklist.md
+│       │   ├── login-checklist.md
+│       │   ├── inventory-checklist.md
+│       │   ├── cart-checklist.md
+│       │   └── checkout-checklist.md
+│       │
+│       ├── screenshots/
+│       │   ├── github-actions-success.jpg
+│       │   ├── allure-report-overview.jpg
+│       │   ├── playwright-report.jpg
+│       │   ├── BUG-001.png
+│       │   ├── BUG-002.gif
+│       │   ├── BUG-003.png
+│       │   └── BUG-004.gif
+│       │
+│       ├── test-cases/
+│       │   ├── login-test-cases.md
+│       │   ├── inventory-test-cases.md
+│       │   ├── cart-test-cases.md
+│       │   └── checkout-test-cases.md
+│       │
+│       └── test-report.md
 │
 ├── playwright/
 │   ├── fixtures/
@@ -271,7 +294,6 @@ qa-saucedemo-portfolio/
 │   │   ├── cart.spec.ts
 │   │   └── checkout.spec.ts
 │   │
-│   ├── screenshots/
 │   ├── playwright.config.ts
 │   ├── package.json
 │   ├── package-lock.json
@@ -446,12 +468,12 @@ npm run trace:open -- path/to/trace.zip
 Планируемые улучшения:
 
 * добавить Docker для запуска тестов в контейнере;
-* опубликовать Allure Report через GitHub Pages;
+* добавить историю Allure Report / trend-графики;
 * расширить API/HTTP checks при наличии подходящих backend endpoints;
 * расширить набор bug reports при дальнейшем exploratory testing;
 * добавить больше негативных и edge-case сценариев;
 * добавить визуальные проверки для отдельных UI-состояний;
-* улучшить README с дополнительными скриншотами Allure Report и Trace Viewer.
+* добавить дополнительные примеры Trace Viewer при падениях тестов.
 
 ---
 
@@ -518,23 +540,22 @@ The documentation is organized by the main functional areas of the application:
 
 #### Checklists
 
-* [Smoke Checklist](manual-testing/checklists/smoke-checklist.md)
-* [Login Checklist](manual-testing/checklists/login-checklist.md)
-* [Inventory Checklist](manual-testing/checklists/inventory-checklist.md)
-* [Cart Checklist](manual-testing/checklists/cart-checklist.md)
-* [Checkout Checklist](manual-testing/checklists/checkout-checklist.md)
-* [Regression Checklist](manual-testing/checklists/regression-checklist.md)
+* [Smoke Checklist](manual-testing/docs/checklists/smoke-checklist.md)
+* [Login Checklist](manual-testing/docs/checklists/login-checklist.md)
+* [Inventory Checklist](manual-testing//docs/checklists/inventory-checklist.md)
+* [Cart Checklist](manual-testing//docs/checklists/cart-checklist.md)
+* [Checkout Checklist](manual-testing//docs/checklists/checkout-checklist.md)
 
 #### Test Cases
 
-* [Login Test Cases](manual-testing/test-cases/login-test-cases.md)
-* [Inventory Test Cases](manual-testing/test-cases/inventory-test-cases.md)
-* [Cart Test Cases](manual-testing/test-cases/cart-test-cases.md)
-* [Checkout Test Cases](manual-testing/test-cases/checkout-test-cases.md)
+* [Login Test Cases](manual-testing/docs/test-cases/login-test-cases.md)
+* [Inventory Test Cases](manual-testing/docs/test-cases/inventory-test-cases.md)
+* [Cart Test Cases](manual-testing/docs/test-cases/cart-test-cases.md)
+* [Checkout Test Cases](manual-testing/docs/test-cases/checkout-test-cases.md)
 
 #### Bug Reports
 
-* [Bug Reports](manual-testing/bug-reports/)
+* [Bug Reports](manual-testing/docs/bug-reports/)
 
 ---
 
@@ -631,25 +652,33 @@ This allows test results to be analyzed after every CI execution.
 
 ---
 
+### Live Allure Report
+
+The latest Allure Report is published via GitHub Pages:
+
+[Open Allure Report](https://gorbunovaav.github.io/qa-saucedemo-portfolio/)
+
+---
+
 ### Report Examples
 
 #### GitHub Actions
 
 Successful CI pipeline run:
 
-![GitHub Actions Success](docs/screenshots/github-actions-success.png)
+![GitHub Actions Success](docs/screenshots/github-actions-success.jpg)
 
 #### Allure Report
 
 Example of the Allure Report after automated test execution:
 
-![Allure Report Overview](docs/screenshots/allure-report-overview.png)
+![Allure Report Overview](docs/screenshots/allure-report-overview.jpg)
 
 #### Playwright HTML Report
 
 Example of the default Playwright HTML report:
 
-![Playwright HTML Report](docs/screenshots/playwright-report.png)
+![Playwright HTML Report](docs/screenshots/playwright-report.jpg)
 
 ---
 
@@ -689,20 +718,36 @@ API/HTTP checks are placed in a separate Playwright project named `api`, so they
 qa-saucedemo-portfolio/
 
 ├── manual-testing/
-│   ├── bug-reports/
-│   ├── checklists/
-│   │   ├── smoke-checklist.md
-│   │   ├── login-checklist.md
-│   │   ├── inventory-checklist.md
-│   │   ├── cart-checklist.md
-│   │   ├── checkout-checklist.md
-│   │   └── regression-checklist.md
-│   │
-│   └── test-cases/
-│       ├── login-test-cases.md
-│       ├── inventory-test-cases.md
-│       ├── cart-test-cases.md
-│       └── checkout-test-cases.md
+│   └── docs/
+│       ├── bug-reports/
+│       │   ├── BUG-001.md
+│       │   ├── BUG-002.md
+│       │   ├── BUG-003.md
+│       │   └── BUG-004.md
+│       │
+│       ├── checklists/
+│       │   ├── smoke-checklist.md
+│       │   ├── login-checklist.md
+│       │   ├── inventory-checklist.md
+│       │   ├── cart-checklist.md
+│       │   └── checkout-checklist.md
+│       │
+│       ├── screenshots/
+│       │   ├── github-actions-success.jpg
+│       │   ├── allure-report-overview.jpg
+│       │   ├── playwright-report.jpg
+│       │   ├── BUG-001.png
+│       │   ├── BUG-002.gif
+│       │   ├── BUG-003.png
+│       │   └── BUG-004.gif
+│       │
+│       ├── test-cases/
+│       │   ├── login-test-cases.md
+│       │   ├── inventory-test-cases.md
+│       │   ├── cart-test-cases.md
+│       │   └── checkout-test-cases.md
+│       │
+│       └── test-report.md
 │
 ├── playwright/
 │   ├── fixtures/
@@ -715,7 +760,6 @@ qa-saucedemo-portfolio/
 │   │   ├── cart.spec.ts
 │   │   └── checkout.spec.ts
 │   │
-│   ├── screenshots/
 │   ├── playwright.config.ts
 │   ├── package.json
 │   ├── package-lock.json
@@ -890,9 +934,9 @@ npm run trace:open -- path/to/trace.zip
 Planned improvements:
 
 * add Docker for running tests in a container;
-* publish Allure Report via GitHub Pages;
+* add Allure Report history / trend charts;
 * expand API/HTTP checks if suitable backend endpoints are available;
 * expand bug reports during further exploratory testing;
 * add more negative and edge-case scenarios;
 * add visual checks for selected UI states;
-* improve README with additional Allure Report and Trace Viewer screenshots.
+* add additional Trace Viewer examples for failed tests.
