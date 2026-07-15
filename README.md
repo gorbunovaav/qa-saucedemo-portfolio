@@ -200,19 +200,19 @@ CI-пайплайн выполняет следующие шаги:
 
 Успешный запуск CI pipeline:
 
-![GitHub Actions Success](docs/screenshots/github-actions-success.jpg)
+![GitHub Actions Success](manual-testing/docs/screenshots/github-actions-success.jpg)
 
 #### Allure Report
 
 Пример Allure Report после выполнения автотестов:
 
-![Allure Report Overview](docs/screenshots/allure-report-overview.jpg)
+![Allure Report Overview](manual-testing/docs/screenshots/allure-report-overview.jpg)
 
 #### Playwright HTML Report
 
 Пример стандартного HTML-отчета Playwright:
 
-![Playwright HTML Report](docs/screenshots/playwright-report.jpg)
+![Playwright HTML Report](manual-testing/docs/screenshots/playwright-report.jpg)
 
 ---
 
