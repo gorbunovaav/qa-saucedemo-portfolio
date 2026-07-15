@@ -666,19 +666,19 @@ The latest Allure Report is published via GitHub Pages:
 
 Successful CI pipeline run:
 
-![GitHub Actions Success](docs/screenshots/github-actions-success.jpg)
+![GitHub Actions Success](manual-testing/docs/screenshots/github-actions-success.jpg)
 
 #### Allure Report
 
 Example of the Allure Report after automated test execution:
 
-![Allure Report Overview](docs/screenshots/allure-report-overview.jpg)
+![Allure Report Overview](manual-testing/docs/screenshots/allure-report-overview.jpg)
 
 #### Playwright HTML Report
 
 Example of the default Playwright HTML report:
 
-![Playwright HTML Report](docs/screenshots/playwright-report.jpg)
+![Playwright HTML Report](manual-testing/docs/screenshots/github-actions-success.jpg)
 
 ---
 
